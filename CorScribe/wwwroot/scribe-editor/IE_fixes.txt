@@ -1,0 +1,100 @@
+
+scribe-plugin-curly-quotes
+
+// https://github.com/webcomponents/webcomponentsjs/issues/556
+
+                function mapTextNodes(containerElement, func)
+                {
+                    // Accept all currently filtered elements.
+                    function acceptNode()
+                    {
+                        return NodeFilter.FILTER_ACCEPT;
+                    }
+
+                    // Work around Internet Explorer wanting a function instead of an object.
+                    // IE also *requires* this argument where other browsers don't.
+                    var safeFilter = acceptNode;
+                    safeFilter.acceptNode = acceptNode;
+
+
+                    
+                    // TODO: Only walk inside of text nodes within inline elements
+                    
+                    // https://github.com/webcomponents/webcomponentsjs/issues/556
+
+                    // https://developer.mozilla.org/en-US/docs/Web/API/Document/createTreeWalker
+                    // var walker = document.createTreeWalker(containerElement, NodeFilter.SHOW_TEXT);
+                    
+                    var walker = document.createTreeWalker(containerElement, NodeFilter.SHOW_TEXT, safeFilter, true);
+
+
+
+
+scribe:
+src\api\command.js
+
+    Command.prototype.queryState = function ()
+    {
+        if (this.patch)
+        {
+            return this.patch.queryState();
+        }
+        else
+        {
+            if (this.commandName === "Cleanup")
+            {
+                return false;
+            } 
+
+            return document.queryCommandState(this.commandName);
+        }
+    };
+
+
+
+src/undo-manager.js
+
+  var createCustomEvent;
+
+  if (typeof window.CustomEvent !== 'function')
+  {
+      createCustomEvent = function (eventType, options)
+      {
+          var event = document.createEvent('CustomEvent');
+          event.initEvent(eventType, !!options.bubbles, !!options.cancelable, options.detail || null);
+          return event;
+      };
+  } else
+  {
+      createCustomEvent = function (eventType, options)
+      {
+          return new CustomEvent(eventType, options);
+      };
+  }
+
+
+
+  UndoManager.prototype._dispatch = function(event, transactions) {
+      if (this._fireEvent)
+      {
+          /*
+          this._ush.dispatchEvent(new CustomEvent(event, {
+            detail: {transactions: transactions.toArray()},
+            bubbles: true,
+            cancelable: false
+          }));
+          */
+
+          this._ush.dispatchEvent(
+              createCustomEvent(event, {
+                  detail: { transactions: transactions.toArray() },
+                  bubbles: true, 
+                  cancelable: false
+              })
+          );
+
+    }
+  }
+
+  return UndoManager;
+});

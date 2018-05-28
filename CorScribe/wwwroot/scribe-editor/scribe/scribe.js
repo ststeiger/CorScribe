@@ -5282,27 +5282,6 @@ define('node',[
     });
   }
 
-  // IE does not have CustomEvent constructor to directly create custom events.		
-  // This is why we use the deprecated `document.createEvent` method for IE.		
-  var createCustomEvent;
-
-  if (typeof window.CustomEvent !== 'function')
-  {
-      createCustomEvent = function (eventType, options)
-      {
-          var event = document.createEvent('CustomEvent');
-          event.initEvent(eventType, !!options.bubbles, !!options.cancelable, options.detail || null);
-          return event;
-      };
-  } else
-  {
-      createCustomEvent = function (eventType, options)
-      {
-          return new CustomEvent(eventType, options);
-      };
-  }
-
-
 
   return {
     isInlineElement: isInlineElement,
@@ -5324,8 +5303,7 @@ define('node',[
     unwrap: unwrap,
     removeChromeArtifacts: removeChromeArtifacts,
     elementHasClass: elementHasClass,
-    hasContent: hasContent, 
-    createCustomEvent: createCustomEvent 
+    hasContent: hasContent
   };
 
 });
@@ -6845,6 +6823,32 @@ define('api/command',[],function () {
       }
     };
 
+
+      
+    Command.prototype.queryState = function ()
+    {
+        if (this.patch)
+        {
+            return this.patch.queryState();
+        }
+        else
+        {
+            if (this.commandName === "Cleanup")
+            {
+                return false;
+            } 
+
+            // http://help.dottoro.com/ljkxwclp.php
+            // queryCommandState method (document, TextRange, ...)
+            // The effect of some commands depend on the current state of their target.For example,
+            // if the 'bold' command is executed by the execCommand method on a bold text,
+            //  the bold formatting will be removed; otherwise it makes the text bold.
+            // So the queryCommandState method for the 'bold' command returns true on a bold text and returns false otherwise.
+            return document.queryCommandState(this.commandName);
+        }
+    };
+      
+      /*
     Command.prototype.queryState = function ()
     {
         try
@@ -6852,24 +6856,30 @@ define('api/command',[],function () {
             if (!this)
                 return false;
 
-            if (this.patch)
+            if (this.patch && this.patch != null && this.patch.queryState)
             {
+                console.log("here");
                 return this.patch.queryState();
-            } else if (this.commandName)
+            } else if (this.commandName && this.commandName != null && document.queryCommandState)
             {
+                console.log("there");
+                if (this.commandName === "Cleanup") return false;
+
                 return document.queryCommandState(this.commandName);
             }
 
+            
         }
         catch (e)
         {
-            // debugger;
+            debugger;
             console.log(e);
         }
 
         // debugger;
         return true;
     };
+      */
 
     Command.prototype.queryEnabled = function () {
       if (this.patch) {
@@ -7281,29 +7291,21 @@ define('undo-manager',[
   UndoManager.prototype._dispatch = function(event, transactions) {
       if (this._fireEvent)
       {
-
-       
-
-
           /*
-      this._ush.dispatchEvent(new CustomEvent(event, {
-        detail: {transactions: transactions.toArray()},
-        bubbles: true,
-        cancelable: false
-      }));*/
-          this._ush.dispatchEvent(/*
-              new CustomEvent(event, {
-        detail: {transactions: transactions.toArray()},
-        bubbles: true,
-        cancelable: false
-              }*/
+          this._ush.dispatchEvent(new CustomEvent(event, {
+            detail: {transactions: transactions.toArray()},
+            bubbles: true,
+            cancelable: false
+          }));
+          */
+
+          this._ush.dispatchEvent(
               createCustomEvent(event, {
                   detail: { transactions: transactions.toArray() },
                   bubbles: true, 
                   cancelable: false
               })
           );
-
 
     }
   }

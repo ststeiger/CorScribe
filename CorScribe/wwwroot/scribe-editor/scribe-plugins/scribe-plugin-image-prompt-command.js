@@ -25,10 +25,9 @@
         }
 
 
-
+        // Constructor 
         return function (scribe)
         {
-            debugger;
             var imagePromptCommand = new scribe.api.Command('insertImage');
             imagePromptCommand.nodeName = 'IMG';
 
