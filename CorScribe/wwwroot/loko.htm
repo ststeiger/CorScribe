@@ -1,16 +1,9 @@
 ﻿<!doctype html>
-<!--
- * Jodit Editor (https://xdsoft.net/jodit/)
- * License https://xdsoft.net/jodit/license.html
- * Copyright 2013-2018 Valeriy Chupurnov https://xdsoft.net
--->
 <html>
 <head>
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
-    
+    <meta charset="utf-8" />
     
     <meta http-equiv="cache-control" content="max-age=0" />
     <meta http-equiv="cache-control" content="no-cache" />
@@ -19,21 +12,41 @@
     <meta http-equiv="pragma" content="no-cache" />
 
     <title>Jodit Example - Custom Icons</title>
+
+    <title>Scribe</title>
     <!--
-    <link rel="icon" type="image/png" href="assets/icon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.00, minimum-scale=1.00, maximum-scale=1.00" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.00, minimum-scale=1.00, maximum-scale=10.00, user-scalable=yes" />
+    -->
+
+    <!--
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
         -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.00, minimum-scale=0.00, maximum-scale=10.00, user-scalable=yes" />
+        
+    <link rel="stylesheet" type="text/css" href="jodit-3_1_95/jodit.min.css">
+    <style>
+        * 
+        {
+            box-sizing: border-box;
+        }
+    </style>
+
 </head>
 <body>
     <textarea id="area_editor"></textarea>
     
-
-
-    <link rel="stylesheet" type="text/css" href="jodit-3_1_95/jodit.min.css">
+    <!--
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,700,700i" rel="stylesheet">
+    
+        -->
+
     <script src="https://use.fontawesome.com/c1f20c2bd7.js"></script>
     <script src="jodit-3_1_95/jodit.min.js"></script>
+
     <script>
         var editor = new Jodit('#area_editor', {
+            language: 'de',
             events: {
                 getIcon: function (name, control, clearName)
                 {
@@ -41,6 +54,15 @@
 
                     switch (clearName)
                     {
+                        case 'bold':
+                            return '<span style="text-align: center;font-size:14px; font-weight: bold; text-shadow: 2px 2px #f0f0f0;">F</span>';
+                            break;
+                        case 'italic':
+                            return '<span style="text-align: center;font-size:14px; font-weight: bold; font-style: italic; text-shadow: 2px 2px #f0f0f0;">K</span>';
+                            break;
+                        case 'strikethrough':
+                            return '<span style="text-align: center;font-size:14px; font-weight: bold; text-decoration: line-through; " >D</span>';
+                            break;
                         case 'redo':
                             code = 'rotate-right';
                             break;

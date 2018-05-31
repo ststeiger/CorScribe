@@ -5158,10 +5158,17 @@
         var i = o(0),
             r = o(1),
             s = o(3);
+
+        var lsfs = [];
+        for (var fsi = 0; fsi <= 200; fsi+=0.25)
+            lsfs.push(fsi + "mm");
+
+        // console.log(kkk);
+
         r.Config.prototype.controls.fontsize = {
             command: "fontSize",
-            list: ["8", "9", "10", "11", "12", "14", "16", "18", "24", "30", "36", "48", "60", "72", "96"],
-            template: function (e, t, o)
+            list: lsfs //["8", "9", "10", "11", "12", "14", "16", "18", "24", "30", "36", "48", "60", "72", "96", "100"],
+            ,template: function (e, t, o)
             {
                 return o
             },
@@ -5205,8 +5212,17 @@
                 "Georgia,serif": "Georgia",
                 "Impact,Charcoal,sans-serif": "Impact",
                 "Tahoma,Geneva,sans-serif": "Tahoma",
-                "'Times New Roman',Times,serif": "Times New Roman",
-                "Verdana,Geneva,sans-serif": "Verdana"
+                "'Times New Roman',Times,serif": "Times New Roman"
+                , "Verdana,Geneva,sans-serif": "Verdana"
+                , "Calibri,Geneva,sans-serif": "Calibri"
+                , "Vivaldi": "Vivaldi"
+                //, "Matura MT Script": "Matura"
+                , "Matura MT Script Capitals": "Matura"
+                , "Goudy Stout": "Goudy Stout"
+                // https://www.fontsquirrel.com/tools/webfont-generator
+                , "bowlby_one_scregular": "Bowlby"
+                , "Comic Sans MS": "Comic"
+                
             },
             template: function (e, t, o)
             {
