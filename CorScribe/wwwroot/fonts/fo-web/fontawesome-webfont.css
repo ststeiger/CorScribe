@@ -1,0 +1,18 @@
+/*!
+ * Font Awesome Free 5.0.13 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
+ */
+
+@font-face {
+    font-family: 'Font Awesome';
+    font-style: normal;
+    font-weight: 400;
+    src: url("fontawesome-webfont.svg");
+    src: url("fontawesome-webfont.eot?#iefix") format("embedded-opentype"), url("fontawesome-webfont.woff2") format("woff2"), url("fontawesome-webfont.woff") format("woff"), url("fontawesome-webfont.ttf") format("truetype"), url("fontawesome-webfont.svg#fontawesome") format("svg");
+}
+
+
+.fa 
+{
+    font-family: 'Font Awesome'
+}

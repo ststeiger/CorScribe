@@ -6887,7 +6887,7 @@
             mode: "ace/mode/html",
             wrap: !0,
             highlightActiveLine: !0
-        }, i.Config.prototype.sourceEditorCDNUrlsJS = ["https://cdnjs.cloudflare.com/ajax/libs/ace/1.3.3/ace.js"], i.Config.prototype.beautifyHTMLCDNUrlsJS = ["https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.7.5/beautify.min.js", "https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.7.5/beautify-html.min.js"], i.Config.prototype.controls.source = {
+        }, i.Config.prototype.sourceEditorCDNUrlsJS = ["https://cdnjs.cloudflare.com/ajax/libs/ace/1.3.3/ace.js"], i.Config.prototype.beautifyHTMLCDNUrlsJS = ["jodit-3_1_95/beautify.min.js", "jodit-3_1_95/beautify-html.min.js"], i.Config.prototype.controls.source = {
             mode: r.MODE_SPLIT,
             exec: function (e)
             {
