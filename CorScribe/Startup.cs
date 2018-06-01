@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
+
+
+
 namespace CorScribe
 {
     public class Startup
@@ -15,6 +18,7 @@ namespace CorScribe
         {
             Configuration = configuration;
         }
+        
 
         public IConfiguration Configuration { get; }
 
