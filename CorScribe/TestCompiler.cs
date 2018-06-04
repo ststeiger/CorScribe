@@ -94,8 +94,17 @@ namespace CorScribe
             System.Console.WriteLine(str);
             return str;
         }
-
-
+        
+        
+        // TestCompiler.Test();
+        public static void Test()
+        {
+            string vbCode = @"
+return 5+5;
+";
+            object obj = Eval(vbCode);
+            System.Console.WriteLine(obj);
+        }
 
         // http://stackoverflow.com/questions/2684278/why-does-microsoft-jscript-work-in-the-code-behind-but-not-within-a
         public static object Eval(string vbCode)
@@ -108,13 +117,16 @@ namespace CorScribe
             cp.ReferencedAssemblies.Add("System.dll");
             // cp.ReferencedAssemblies.Add("System.Xml.dll")
             // cp.ReferencedAssemblies.Add("System.Data.dll")
-            cp.ReferencedAssemblies.Add("Microsoft.JScript.dll");
-
+            
+            
+            // cp.ReferencedAssemblies.Add("Microsoft.JScript.dll");
+            
+            
             // Sample code for adding your own referenced assemblies
             // cp.ReferencedAssemblies.Add("c:\yourProjectDir\bin\YourBaseClass.dll")
             // cp.ReferencedAssemblies.Add("YourBaseclass.dll")
-
-
+            
+            
             cp.CompilerOptions = "/t:library";
             cp.GenerateInMemory = true;
             System.Text.StringBuilder sb = new System.Text.StringBuilder("");
