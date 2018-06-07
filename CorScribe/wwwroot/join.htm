@@ -106,10 +106,10 @@ cena quidem posse videamur?
             preset: 'inline',
             language: 'de',
             buttons: [
-                
+
                 //'source', '|',
                 'bold',
-                
+
                 'strikethrough',
                 'underline',
                 'italic', '|',
@@ -132,9 +132,9 @@ cena quidem posse videamur?
                 'fullsize'
                 //,'print'
                 //,'about'
-                
+
             ],
-            
+
             buttonsXS: [
                 'bold',
                 'image', '|',
@@ -146,12 +146,12 @@ cena quidem posse videamur?
                 'dots'
             ]
 
-            
+
             , events: {
                 getIcon: function (name, control, clearName)
                 {
                     var code = clearName;
-                    
+
                     switch (clearName)
                     {
                         case 'dots':
@@ -208,10 +208,13 @@ cena quidem posse videamur?
                             break;
                     }
                     
+                    //if (Jodit.modules.ToolbarIcon.icons[clearName] != null) return Jodit.modules.ToolbarIcon.icons[clearName];
+                    if (Jodit.modules.ToolbarIcon.icons[name] != null) return Jodit.modules.ToolbarIcon.icons[name];
+                    
                     return '<i style="font-size:14px" class="fa fa-' + code + ' fa-xs"></i>';
                 }
             }
-            
+
 
 
         });
